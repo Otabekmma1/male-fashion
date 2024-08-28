@@ -1,0 +1,121 @@
+{% load static %}
+{% load shop_extras %}
+{% all_categories as categories %}
+{% all_sizes as sizes %}
+<!-- Shop Section Begin -->
+<section class="shop spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="shop__sidebar">
+                    <div class="shop__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="shop__sidebar__accordion">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-heading">
+                                    <a data-toggle="collapse" data-target="#collapseOne">Kategoriyalar</a>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shop__sidebar__categories">
+                                            <ul class="nice-scroll">
+                                                <li><a href="{% url 'shop' %}">Barchasi</a></li>
+                                                {% for category in categories %}
+                                                <li><a href="{% url 'shop_by_category' category.id %}">{{category.name}}
+                                                    ({{category.product_set.count}})</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-heading">
+                                    <a data-toggle="collapse" data-target="#collapseFour">O'lchamlar</a>
+                                </div>
+                                <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shop__sidebar__size">
+                                            {% for size in sizes.all %}
+                                            <label for="{{size.name}}"><a
+                                                    href="{% url 'shop_by_size' size.id %}">{{size.name}}</a>
+                                                <input type="radio" id="{{size.name}}">
+                                            </label>
+                                            {% empty %}
+                                            <label for="qw">O'lcham yo'q
+                                                <input type="radio" id="qw">
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="shop__product__option">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__left">
+                                <p>Showing 1–9 of {{page_obj.count}} results</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__right">
+                                <p>Sort by Price:</p>
+                                <select id="my_select" onchange="redirectToPage()" name="price_list"
+                                        class="border-0 form-select-sm bg-light me-3">
+                                    <option>-</option>
+                                    <option value="{% url 'shop' %}">Barchasi</option>
+                                    <option value="{% url 'sorting' '0' %}">$0-50</option>
+                                    <option value="{% url 'sorting' '50' %}">$50-100</option>
+                                    <option value="{% url 'sorting' '100' %}">$100-200</option>
+                                    <option value="{% url 'sorting' '200' %}">$200-500</option>
+                                    <option value="{% url 'sorting' '500' %}">$500 +</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for product in page_obj %}
+                    {% include 'components/_product_one.html' %}
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col-lg-12" style="margin-left: 300px;">
+
+                        <div class="pagination">
+                            <ul>
+                                {% if page_obj.has_previous %}
+                                <li class="rect">
+                                    <a href="?page={{ page_obj.previous_page_number }}">Orqaga</a>
+                                </li>
+                                {% endif %}
+                                {% for page in page_obj.paginator.page_range %}
+                                <li class="page-number {% if page_obj.number == page %} active {% endif %}">
+                                    <a href="?page={{ page }}">{{ page }}</a>
+                                </li>
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                <li class="rect">
+                                    <a href="?page={{ page_obj.next_page_number }}">Keyingi</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Section End -->

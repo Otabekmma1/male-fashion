@@ -1,0 +1,102 @@
+{% load static %}
+<meta name="description" content="Male_Fashion Template">
+<meta name="keywords" content="Male_Fashion, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Male-Fashion | Template</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<style>
+.color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+
+.color-circle1 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left:20px;
+}
+
+.color-label input[type="radio"]:checked + .color-circle {
+    border: 2px solid #000;
+}
+
+    .rating-list li {
+      float: right;
+      color: #ddd;
+      padding: 10px 5px;
+    }
+
+    .rating-list li:hover,
+    .rating-list li:hover ~ li {
+      color: orange;
+    }
+
+    .rating-list {
+      display: inline-block;
+      list-style: none;
+    }
+    .checked {
+        color: orange;
+    }
+</style>
+  <style>
+        .pagination {
+            text-align: center; /* Center the pagination */
+            margin: 20px 0; /* Optional: add some margin */
+        }
+        .pagination ul {
+            list-style-type: none;
+            padding: 0;
+            display: inline-flex; /* Display list items in a row */
+        }
+        .pagination li {
+            margin: 0 5px; /* Space between pagination items */
+        }
+        .pagination a {
+            text-decoration: none;
+            color: black;
+            display: inline-block;
+            padding: 10px;
+            border: 2px solid black; /* Black border */
+            text-align: center; /* Center text horizontally */
+        }
+        .pagination .page-number a {
+            border-radius: 50%; /* Circle shape */
+            width: 40px;
+            height: 40px;
+            line-height: 20px; /* Center text vertically */
+        }
+        .pagination .rect a {
+            border-radius: 5px; /* Slightly rounded corners for rectangles */
+            padding: 8px 16px; /* Different padding for rectangular links */
+        }
+        .pagination .active a {
+            background-color: black;
+            color: white;
+        }
+        .pagination a:hover {
+            background-color: #ddd;
+            border-color: black;
+        }
+    </style>

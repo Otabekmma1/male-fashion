@@ -1,0 +1,50 @@
+    <form method="post" action="{% url 'register' %}">
+      {% csrf_token %}
+
+      <!-- Name input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" name="first_name" id="registerName" class="form-control" />
+        <label class="form-label" for="registerName">Ism</label>
+      </div>
+      <!-- Name input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" name="last_name" id="registerNam" class="form-control" />
+        <label class="form-label" for="registerNam">Familiya</label>
+      </div>
+
+      <!-- Username input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" name="username" id="registerUsername" class="form-control" />
+        <label class="form-label" for="registerUsername">Username</label>
+      </div>
+
+      <!-- Email input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="email" name="email" id="registerEmail" class="form-control" />
+        <label class="form-label" for="registerEmail">Pochta</label>
+      </div>
+
+      <!-- Password input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="password" name="password1" id="registerPassword" class="form-control" />
+        <label class="form-label" for="registerPassword">Parol</label>
+      </div>
+
+      <!-- Repeat Password input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="password" name="password2" id="registerRepeatPassword" class="form-control" />
+        <label class="form-label" for="registerRepeatPassword">Parolni takrorlang</label>
+      </div>
+
+      <!-- Checkbox -->
+      <div class="form-check d-flex justify-content-center mb-4">
+        <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
+          aria-describedby="registerCheckHelpText" />
+        <label class="form-check-label" for="registerCheck">
+          I have read and agree to the terms
+        </label>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit"  data-mdb-ripple-init class="btn btn-primary btn-block mb-3">Sign in</button>
+    </form>

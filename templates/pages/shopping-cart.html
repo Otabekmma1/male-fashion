@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load shop_extras %}
+{% load static %}
+
+{% block main %}
+{% get_total_price request as total_price %}
+{% get_order_products request as order_products %}
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Xarid savati</h4>
+                    <div class="breadcrumb__links">
+                        <a href="{% url 'index' %}">Bosh sahifa</a>
+                        <a href="{% url 'shop' %}">Do'kon</a>
+                        <span>Xarid savati</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <table>
+                        <thead>
+                        <tr class="text-center">
+                            <th>Mahsulot</th>
+                            <th>Rang</th>
+                            <th>Soni</th>
+                            <th>Umumiy</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order_product in order_products %}
+                        <tr class="text-center">
+                            <td class="product__cart__item">
+                                <div class="product__cart__item__pic">
+                                    <img src="{{order_product.product.image.url}}" style="width: 150px;" alt="">
+                                </div>
+                                <div class="product__cart__item__text">
+                                    <h6>{{order_product.product.title}}</h6>
+                                    <h6><span class="text-muted">Size:</span>
+                                        {% for size in order_product.size.all %}
+                                        {{ size.name}},
+                                        {% empty %}
+                                        -
+                                        {% endfor %}
+                                    </h6>
+                                    <h5>${{order_product.product.price}}</h5>
+                                </div>
+                            </td>
+                            <td class="product__cart__item">
+                                <div class="product__cart__item__text">
+                                    {% for color in order_product.color.all %}
+
+                                    <div class="color-circle1"
+                                         style="background-color: {{color.hex_value}};"></div>
+                                    {% empty %}
+                                    <div class="text-center"><h2>x</h2></div>
+                                    {% endfor %}
+
+                                </div>
+                            </td>
+                            <td class="quantity__item">
+                                <div class="quantity">
+                                    <div class="text-center">
+                                        <a href="{% url 'to_cart' order_product.product.id 'delete' %}"
+                                           class="btn btn-sm btn-minus rounded-circle bg-light border float-left">
+                                            <i class="fa fa-minus"></i>
+                                        </a>
+                                        <input type="number" min="1" max="{{order_product.product.quantity}}"
+                                               value="{{order_product.quantity}}" class="text-center"
+                                               style="width: 50px;">
+                                        <a href="{% url 'to_cart' order_product.product.id 'add' %}"
+                                           class="btn btn-sm btn-plus rounded-circle bg-light border float-right">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td class="cart__price">$ {{order_product.get_cart_price}}</td>
+                            <td class="cart__close"><a href="{% url 'delete_product' order_product.product.id %}"><i
+                                    class="fa fa-close"></i></a></td>
+                        </tr>
+                        {% empty %}
+                        <tr class="text-center">
+                            <td>
+                                <h5>Mahsulot yo'q</h5>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn">
+                            <a href="{% url 'shop' %}">Xaridni davom ettirish</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn update__btn">
+                            <a href="{% url 'cart' %}"><i class="fa fa-spinner"></i>Savatni yangilash</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart__discount">
+                    <h6>Chegirma kodlari</h6>
+                    <form action="#">
+                        <input type="text" placeholder="Kupon kod">
+                        <button type="submit">Tasdiqlash</button>
+                    </form>
+                </div>
+                <div class="cart__total">
+                    <h6>Umumiy savat</h6>
+                    <ul>
+                        <li>Oraliq umumiy <span>$ {{total_price}}</span></li>
+                        <li>Umumiy <span>$ {{total_price}}</span></li>
+                    </ul>
+                    {% if total_price > 0 %}
+                    <a href="{% url 'check' %}" class="primary-btn">Proceed to checkout</a>
+                    {% else %}
+                    <a href="{% url 'shop' %}" class="primary-btn">Mahsulot yoq</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shopping Cart Section End -->
+
+{% endblock main %}

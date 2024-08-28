@@ -1,0 +1,61 @@
+{% load static %}
+{% load shop_extras %}
+{% get_total_cart_quantity request as total_quantity %}
+{% get_total_price request as total_price %}
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-7">
+                    <div class="header__top__left">
+                        <p>Bepul yetkazib berish, 30 kunlik qaytarish yoki pulni qaytarish kafolati.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-5">
+                    <div class="header__top__right">
+                        <div class="header__top__links">
+                            {% if request.user.is_authenticated %}
+                            <a href="{% url 'logout' %}">Chiqish</a>
+                            <a href="{% url 'profile' %}">Akkaunt</a>
+                            {% else %}
+                            <a href="{% url 'login' %}">Kirish</a>
+                            <a href="{% url 'register' %}">Ro'yxatdan o'tish</a>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="header__logo">
+                    <a href="./index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <nav class="header__menu mobile-menu">
+                    <ul>
+                        <li><a href="{% url 'index' %}">Bosh sahifa</a></li>
+                        <li><a href="{% url 'shop' %}">Do'kon</a></li>
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                        <li><a href="{% url 'contact' %}">Aloqa</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div class="header__nav__option">
+                    <a href="#" class="search-switch"><img src="{% static 'img/icon/search.png' %}" alt=""></a>
+                    <a href="#"><img src="{% static 'img/icon/heart.png' %}" alt=""></a>
+                    <a href="{% url 'cart' %}"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>{{total_quantity}}</span></a>
+                    <div class="price">${{total_price}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="canvas__open"><i class="fa fa-bars"></i></div>
+    </div>
+</header>
+<!-- Header Section End -->

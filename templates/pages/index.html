@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block hero %}
+    {% include 'components/_hero_section.html' %}
+{% endblock hero %}
+
+{% block main %}
+<!-- Banner Section Begin -->
+<section class="banner spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 offset-lg-4">
+                <div class="banner__item">
+                    <div class="banner__item__pic">
+                        <img src="{% static 'img/banner/banner-1.jpg' %}" alt="">
+                    </div>
+                    <div class="banner__item__text">
+                        <h2>Kiyim kolleksiyalari</h2>
+                        <a href="{% url 'shop' %}">Hozir xarid qiling</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="banner__item banner__item--middle">
+                    <div class="banner__item__pic">
+                        <img src="{% static 'img/banner/banner-2.jpg' %}" alt="">
+                    </div>
+                    <div class="banner__item__text">
+                        <h2>Aksesuarlar</h2>
+                        <a href="{% url 'shop' %}">Hozir xarid qiling</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="banner__item banner__item--last">
+                    <div class="banner__item__pic">
+                        <img src="{% static 'img/banner/banner-3.jpg' %}" alt="">
+                    </div>
+                    <div class="banner__item__text">
+                        <h2>Poyafzal kolleksiyasi</h2>
+                        <a href="{% url 'shop' %}">Hozir xarid qiling</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Section End -->
+
+{% include 'components/_product.html' %}
+
+
+{% include 'components/_latest_blog.html' %}
+{% endblock main %}
