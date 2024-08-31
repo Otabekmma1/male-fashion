@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="chatbox">
+    <input type="text" id="user-input" placeholder="Ask me anything..." />
+    <button onclick="sendMessage()">Send</button>
+</div>
+<div id="chatlog"></div>
+
+<script>
+    function sendMessage() {
+        const message = document.getElementById('user-input').value;
+        fetch(`/chatbot/?message=${message}`)
+            .then(response => response.json())
+            .then(data => {
+                const chatlog = document.getElementById('chatlog');
+                chatlog.innerHTML += `<p>You: ${message}</p><p>Bot: ${data.response}</p>`;
+            });
+    }
+</script>
+
+
+</body>
+</html>

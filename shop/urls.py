@@ -23,6 +23,8 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
 
     path('profile/', user_profile, name='profile'),
-    path('delete-profile/', delete_profile, name='delete_profile')
+    path('delete-profile/', delete_profile, name='delete_profile'),
+
+
 
 ]

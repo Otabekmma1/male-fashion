@@ -8,10 +8,9 @@ from male_fashion import settings
 from django.urls import reverse, reverse_lazy
 from .forms import *
 from django.contrib.auth import login, logout
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, Http404
 from django.core.paginator import Paginator
 import requests
-
 
 #--------------------------- USER -------------------------------------------------
 class UserLogin(FormView):
@@ -116,7 +115,10 @@ def contact(request):
 
 
 def product_detail_by_slug(request, slug):
-    product = Product.objects.get(slug=slug, published=True)
+    try:
+        product = Product.objects.get(slug=slug, published=True)
+    except Product.DoesNotExist:
+        raise Http404("Mahsulot topilmadi")
     related_products = Product.objects.filter(published=True, category=product.category)
     rating = Rating.objects.filter(product=product, user=request.user).first()
     comments = Comments.objects.filter(product=product)
@@ -295,8 +297,11 @@ def send_order_info_to_telegram_bot(order_info):
     chat_id = settings.TELEGRAM_CHAT_ID
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     params = {"chat_id": chat_id, "text": order_info}
-    requests.post(url, params=params)
-
+    response = requests.post(url, params=params)
+    if response.status_code != 200:
+        # xatolikni qayta ishlash
+        print(f"Xabar yuborilmadi. Status kod: {response.status_code}")
+        
 @login_required(login_url='login')
 def rate(request: HttpRequest, product_id: int, rating: int) -> HttpResponse:
     product = Product.objects.get(pk=product_id)
